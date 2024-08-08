@@ -6,6 +6,7 @@ import DashBoard from './components/DashBoard.jsx';
 import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/UI components/TaskList.jsx';
 import ProjectDetails from './components/UI components/ProjectDetails.jsx';
+import ProjectDetailsList from './components/UI components/ProjectDetailsList.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
@@ -19,7 +20,8 @@ function App() {
        <Route path="/DashBoard" element={<DashBoard/>}/>
        <Route path="/taskForm" element={<TaskForm/>}/>
        <Route path='/task' element={<TaskList/>}/>
-       <Route path="/projectDetails" element={<ProjectDetails/>}/>
+       <Route path="/projectDetails/:taskId" element={<ProjectDetails/>}/>
+       <Route path='/projectDetailsList' element={<ProjectDetailsList/>}/>
       </Routes>
       </BrowserRouter>
     </div>

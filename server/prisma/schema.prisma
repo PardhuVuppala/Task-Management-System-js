@@ -13,22 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Task {
-  id                 String   @id @default(uuid()) // Unique identifier for the task
-  userId             String   // Foreign key referencing the UserData model
-  projectName        String   // Name of the project the task belongs to
-  taskName           String   // Name or title of the task
-  teamMembers        Json     // JSON object storing team members and their roles
-  dueDate            DateTime // Due date for the task
-  completionPercentage Int    // Task completion percentage (0-100)
-  forStoringTasks    Json     // JSON object to store the status of tasks
+  id                    String   @id @default(uuid()) // Unique identifier for the task
+  userId                String   // Foreign key referencing the UserData model
+  projectName           String   // Name of the project the task belongs to
+  taskName              String   // Name or title of the task
+  teamMembers           Json     // JSON object storing team members and their roles
+  dueDate               DateTime // Due date for the task
+  completionPercentage Int      // Task completion percentage (0-100)
+  forStoringTasks       Json     // JSON object to store the status of tasks
 
-  createdAt          DateTime @default(now()) // Timestamp when the task was created
-  updatedAt          DateTime @updatedAt // Timestamp when the task was last updated
+  createdAt             DateTime @default(now()) // Timestamp when the task was created
+  updatedAt             DateTime @updatedAt // Timestamp when the task was last updated
 
   // Relationship to UserData
-  user               UserData @relation(fields: [userId], references: [id])
+  user                  UserData @relation(fields: [userId], references: [id])
 
   @@index([userId]) // Index on userId for better query performance
 }
@@ -47,4 +46,9 @@ model UserData {
 
   // Relationship to Task
   tasks         Task[]   // One-to-many relationship with Task
+
+  // Field to store array of task IDs
+  taskIds       String[] @default([]) // Initialize as an empty array
+
+  @@index([email]) // Index on email for better query performance
 }

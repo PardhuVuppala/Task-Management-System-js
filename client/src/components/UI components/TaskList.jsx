@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -39,10 +40,13 @@ const TaskList = () => {
             <span>{task.completionPercentage}%</span>
           </div>
           <div className="flex flex-col">
-            <button className=' bg-primary-100 text-white py-2 px-2 rounded-lg mb-2 hover:border-gray-300 mt-2'>View Details</button>
+            <Link to={`/projectDetails/${task.id}`} className='bg-primary-100 text-white py-2 px-2 rounded-lg mb-2 hover:border-gray-300 mt-2 text-center' style={{textDecoration:"none"}}>
+              
+                View Details
+            </Link>
           </div>
           <div className="flex flex-col">
-           <button className=' bg-primary-100 text-white py-2 px-2 rounded-lg mb-2 hover:border-gray-300 mt-2'>Delete</button>
+            <button className="bg-primary-100 text-white py-2 px-2 rounded-lg mb-2 hover:border-gray-300 mt-2">Delete</button>
           </div>
         </div>
       ))}

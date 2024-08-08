@@ -20,6 +20,9 @@ export default function sidebar() {
     const HandleLogout =(e)=>
     {   e.preventDefault();
         Cookies.remove("name");
+        Cookies.remove("token");
+        Cookies.remove("user_id")
+        Cookies.remove("role")
         navigate("/");
        
     }
@@ -66,7 +69,7 @@ export default function sidebar() {
         const { checked } = e.target;
         setSelectedMembers(prev => ({
           ...prev,
-          [memberId]: checked ? 'Developer' : '' // Adjust role as needed
+          [memberId]: checked ? 'Jman Employee' : '' // Adjust role as needed
         }));
       };
     

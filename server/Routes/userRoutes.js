@@ -10,6 +10,7 @@ router.post('/changepasword', userController.changePassword)
 
 router.get("/is-verify", Authorize, async (req, res) => {
     try {
+      console.log("true")
       res.json(true);
     } catch (err) {
       res.status(500).send("Server Error");
