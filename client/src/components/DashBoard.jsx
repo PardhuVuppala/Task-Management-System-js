@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './UI components/sidebar';
+import TaskList from './UI components/TaskList';
 
 function DashBoard() {
   
@@ -10,8 +11,10 @@ function DashBoard() {
         <div className="bg-gray-200 p-4 rounded shadow">01</div>
         <div className="bg-gray-200 p-4 rounded shadow">05</div>
         <div className="bg-gray-200 p-4 rounded shadow">05</div>
-        <div className="bg-gray-200 p-4 rounded shadow col-span-3 row-span-5">
-          <div className="flex items-center justify-center h-full">06</div>
+        <div className=" p-4 rounded shadow col-span-3 row-span-5">
+          <div className=" h-full">
+          <TaskList/>
+          </div>
         </div>
       </div>
     </div>
