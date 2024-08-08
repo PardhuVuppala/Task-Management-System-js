@@ -50,7 +50,7 @@ const registerUser = async (req, res) => {
 
     await mailService.sendMail(
       email,
-      "Cook Buddy",
+      "Task Management System",
       `${newUser.first_name}, Thank you for registering with us`
   );
 
