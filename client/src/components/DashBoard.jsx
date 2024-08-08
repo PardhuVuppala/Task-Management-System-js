@@ -90,6 +90,7 @@ function Dashboard() {
 
   return (
     <div className="flex">
+      
       <Sidebar className="fixed top-0 left-0 w-1/4 h-screen bg-gray-800 text-white" />
       <div className="ml-1/4 flex-1 p-4 overflow-auto">
         <div className="grid grid-cols-3 gap-4">

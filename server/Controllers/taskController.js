@@ -387,5 +387,57 @@ const getOverdueTasksCount = async (req, res) => {
   }
 };
 
+const getTeamMembersName = async (req, res) => {
+  const { taskId } = req.params;
 
-module.exports = { createTask, getTeamMembers, getAllTasks,getTaskForStoringTasks,updateTaskStatus,AddTask, fetchProjectsSummary,fetchProjectsStatus,getUserProjects ,getProjectSummary,getOverdueTasksCount};
+  try {
+    // Fetch the task to get the teamMembers JSON object
+    const task = await prisma.task.findUnique({
+      where: { id: taskId },
+      select: { teamMembers: true },
+    });
+
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    const teamMembers = task.teamMembers;
+    const teamMemberIds = Object.keys(teamMembers);
+
+    if (teamMemberIds.length === 0) {
+      return res.status(404).json({ error: 'No team members found for this task' });
+    }
+
+    // Fetch user details based on team member IDs
+    const users = await prisma.userData.findMany({
+      where: {
+        id: { in: teamMemberIds },
+      },
+      select: {
+        id: true,
+        first_name: true,
+        last_name: true,
+        email: true,
+      },
+    });
+
+    // Map user data by ID
+    const userMap = users.reduce((acc, user) => {
+      acc[user.id] = {
+        Name: user.first_name +" " + user.last_name,
+        email: user.email,
+      };
+      return acc;
+    }, {});
+
+    // Send the user data back
+    res.json(userMap);
+
+  } catch (error) {
+    console.error('Error fetching team members:', error);
+    res.status(500).json({ error: 'Failed to fetch team members' });
+  }
+};
+
+
+module.exports = { createTask, getTeamMembers, getAllTasks,getTaskForStoringTasks,updateTaskStatus,AddTask, fetchProjectsSummary,fetchProjectsStatus,getUserProjects ,getProjectSummary,getOverdueTasksCount, getTeamMembersName};

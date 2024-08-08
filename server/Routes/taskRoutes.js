@@ -15,6 +15,7 @@ router.get('/projects/status', createTask.fetchProjectsStatus)
 router.get('/user/projects/:userId', createTask.getUserProjects)
 router.get('/user/tasks/:userId',createTask.getProjectSummary)
 router.get('/user/duedate/:userId',createTask.getOverdueTasksCount)
+router.get("/team/members/:taskId",createTask.getTeamMembersName)
 
 
 module.exports = router;

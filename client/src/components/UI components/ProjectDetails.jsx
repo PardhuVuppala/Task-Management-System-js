@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectDetails = () => {
   const { taskId } = useParams();
@@ -10,7 +11,7 @@ const ProjectDetails = () => {
     pending: [],
     completed: []
   });
-
+  const Navigate = useNavigate("/");
   const [newTaskName, setNewTaskName] = useState('');
 
   useEffect(() => {
@@ -52,6 +53,9 @@ const ProjectDetails = () => {
       console.error('Error updating task status:', error);
     }
   };
+  const Back=()=>{
+     Navigate('/DashBoard')
+  }
 
   const handleAddTask = async () => {
     if (newTaskName.trim()) {
@@ -76,6 +80,14 @@ const ProjectDetails = () => {
   };
 
   return (
+    <div>
+  
+
+      <button className="fixed top-4 left-4 bg-primary-100 text-white rounded-full p-3 shadow-lg focus:ring-opacity-50" onClick={Back}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+</svg>
+  </button>
     <div className="min-h-screen flex items-center justify-center bg-gray-200 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-7xl">
         <div className="flex space-x-4">
@@ -126,6 +138,7 @@ const ProjectDetails = () => {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 };
